@@ -6,15 +6,6 @@
 2.
 <profiles>
     <profile>
-        <id>test</id>
-        <activation>
-            <activeByDefault>true</activeByDefault>
-        </activation>
-        <properties>
-            <spring.profiles.active>dev</spring.profiles.active>
-        </properties>
-    </profile>
-    <profile>
         <id>demo</id>
         <build>
             <plugins>
