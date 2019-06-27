@@ -1,7 +1,3 @@
-server:
-  servlet:
-    contextPath: /api
-
 app:
   datasource:
     jdbc-url: jdbc:postgresql://localhost:5432/amigoscodedemo
