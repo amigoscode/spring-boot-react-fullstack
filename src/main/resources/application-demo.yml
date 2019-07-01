@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: @spring.profiles.active@
+
+server:
+  port: 5000
+
+app:
+  datasource:
+    jdbc-url: jdbc:postgresql://fullstackspringbootdb.celswdmxhcr1.eu-west-1.rds.amazonaws.com:5432/amigoscodedemo
+    username: amigoscode
+    password: 123456789
+    pool-size: 30
