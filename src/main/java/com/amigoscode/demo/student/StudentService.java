@@ -4,6 +4,7 @@ import com.amigoscode.demo.EmailValidator;
 import com.amigoscode.demo.exception.ApiRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -47,5 +48,27 @@ public class StudentService {
 
     List<StudentCourse> getAllCoursesForStudent(UUID studentId) {
         return studentDataAccessService.selectAllStudentCourses(studentId);
+    }
+
+    public void updateStudent(UUID studentId, Student student) {
+        Optional.ofNullable(student.getEmail())
+                .ifPresent(email -> {
+                    boolean taken = studentDataAccessService.selectExistsEmail(studentId, email);
+                    if (!taken) {
+                        studentDataAccessService.updateEmail(studentId, email);
+                    } else {
+                        throw new IllegalStateException("Email already in use: " + student.getEmail());
+                    }
+                });
+
+        Optional.ofNullable(student.getFirstName())
+                .filter(fistName -> !StringUtils.isEmpty(fistName))
+                .map(StringUtils::capitalize)
+                .ifPresent(firstName -> studentDataAccessService.updateFirstName(studentId, firstName));
+
+        Optional.ofNullable(student.getLastName())
+                .filter(lastName -> !StringUtils.isEmpty(lastName))
+                .map(StringUtils::capitalize)
+                .ifPresent(lastName -> studentDataAccessService.updateLastName(studentId, lastName));
     }
 }

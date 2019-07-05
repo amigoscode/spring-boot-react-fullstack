@@ -26,3 +26,13 @@ export const addNewStudent = student =>
     })
     .then(checkStatus);
 
+export const updateStudent = (studentId, student) => 
+    fetch(`api/students/${studentId}`, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'PUT',
+        body: JSON.stringify(student)
+    })
+    .then(checkStatus);
+
