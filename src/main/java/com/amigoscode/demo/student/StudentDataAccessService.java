@@ -166,4 +166,11 @@ public class StudentDataAccessService {
                 (resultSet, columnIndex) -> resultSet.getBoolean(1)
         );
     }
+
+    int deleteStudentById(UUID studentId) {
+        String sql = "" +
+                "DELETE FROM student " +
+                "WHERE student_id = ?";
+        return jdbcTemplate.update(sql, studentId);
+    }
 }

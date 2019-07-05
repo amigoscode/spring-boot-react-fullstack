@@ -4,7 +4,8 @@ import Footer from './Footer';
 import './App.css';
 import {
    getAllStudents,
-   updateStudent
+   updateStudent,
+   deleteStudent
 } from './client';
 import AddStudentForm from './forms/AddStudentForm';
 import EditStudentForm from './forms/EditStudentForm';
@@ -19,6 +20,7 @@ import {
   PageHeader,
   Button,
   notification, 
+  Popconfirm
 } from 'antd';
 
 const getIndicatorIcon = () => <Icon type="loading" style={{ fontSize: 24 }} spin />;
@@ -83,6 +85,15 @@ class App extends Component {
       this.fetchStudents();
     }).catch(err => {
       console.error(err.error);
+      this.openNotificationWithIcon('error', 'error', `(${err.error.status}) ${err.error.error}`);
+    });
+  }
+
+  deleteStudent = studentId => {
+    deleteStudent(studentId).then(() => {
+      this.openNotificationWithIcon('success', 'Student deleted', `${studentId} was deleted`);
+      this.fetchStudents();
+    }).catch(err => {
       this.openNotificationWithIcon('error', 'error', `(${err.error.status}) ${err.error.error}`);
     });
   }
@@ -182,6 +193,13 @@ class App extends Component {
           key: 'action',
           render: (text, record) => (
             <Fragment>
+              <Popconfirm
+                placement='topRight'
+                title={`Are you sure to delete ${record.studentId}`} 
+                onConfirm={() => this.deleteStudent(record.studentId)} okText='Yes' cancelText='No'
+                onCancel={e => e.stopPropagation()}>
+                <Button type='danger' onClick={(e) => e.stopPropagation()}>Delete</Button>
+              </Popconfirm>
               <Button style={{marginLeft: '5px'}} type='primary' onClick={() => this.editUser(record)}>Edit</Button>
             </Fragment>
           ),
