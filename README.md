@@ -11,3 +11,6 @@ Course can be found here: https://amigoscode.com/courses/spring-boot-fullstack
 </br> 
 
 <img width="809" alt="Screenshot 2019-08-25 at 16 42 29" src="https://user-images.githubusercontent.com/40702606/63652407-cb653300-c757-11e9-9c49-6568fe8416c4.png">
+
+
+MANTAS SAUNULIS
