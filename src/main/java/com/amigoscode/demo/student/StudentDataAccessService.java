@@ -29,7 +29,7 @@ public class StudentDataAccessService {
                 " gender " +
                 "FROM student";
 
-        return jdbcTemplate.query(sql, mapStudentFomDb());
+        return jdbcTemplate.query(sql, mapStudentFromDb());
     }
 
     int insertStudent(UUID studentId, Student student) {
@@ -106,7 +106,7 @@ public class StudentDataAccessService {
                 );
     }
 
-    private RowMapper<Student> mapStudentFomDb() {
+    private RowMapper<Student> mapStudentFromDb() {
         return (resultSet, i) -> {
             String studentIdStr = resultSet.getString("student_id");
             UUID studentId = UUID.fromString(studentIdStr);
