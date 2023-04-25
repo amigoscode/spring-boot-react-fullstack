@@ -9,14 +9,15 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("api/students")
+@AllArgsConstructor
 public class StudentController {
 
     private final StudentService studentService;
-
-    @Autowired
-    public StudentController(StudentService studentService) {
-        this.studentService = studentService;
-    }
+// TODO: NOT RECOMMENDED : @AllArgs-- annotation
+//     @Autowired
+//     public StudentController(StudentService studentService) {
+//         this.studentService = studentService;
+//     }
 
     @GetMapping
     public List<Student> getAllStudents() {
